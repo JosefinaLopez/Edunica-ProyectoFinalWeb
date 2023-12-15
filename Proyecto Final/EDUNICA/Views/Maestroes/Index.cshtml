@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EDUNICA.Models.Maestro>
+
+@{
+    ViewBag.Title = "Maestros Activos";
+}
+<style>
+    .nose, .opti{
+        width:140px;
+        text-decoration:none;
+
+    }
+    .nose > a {
+        text-decoration: none;
+        color: white;
+    }
+    .container-sm {
+        padding: 34px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .infoxd {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+<div class="container-sm">
+<div class="infoxd">
+    <h1>Maestros</h1>
+    <p class="nose">
+        @Html.ActionLink("+ Nuevo Maestro", "Create")
+    </p>
+</div>
+<hr />
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreMaestro)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMaestro)
+            </td>
+            <td class="opti">
+                @Html.ActionLink("✏️", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("🗑️", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>
+</div>

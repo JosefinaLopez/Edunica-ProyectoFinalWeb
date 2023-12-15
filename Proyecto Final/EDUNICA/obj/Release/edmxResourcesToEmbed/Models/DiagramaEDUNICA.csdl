@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DiagramaEDUNICA" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DiagramaEDUNICAContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Estudiantes" EntityType="DiagramaEDUNICA.Estudiante" />
+    <EntitySet Name="Grados" EntityType="DiagramaEDUNICA.Grado" />
+    <EntitySet Name="Cursos" EntityType="DiagramaEDUNICA.Curso" />
+    <EntitySet Name="Progresos" EntityType="DiagramaEDUNICA.Progreso" />
+    <EntitySet Name="Colaboraciones" EntityType="DiagramaEDUNICA.Colaboracion" />
+    <EntitySet Name="Maestros" EntityType="DiagramaEDUNICA.Maestro" />
+    <EntitySet Name="Categorias" EntityType="DiagramaEDUNICA.Categoria" />
+    <EntitySet Name="InteresesCategorias" EntityType="DiagramaEDUNICA.InteresesCategoria" />
+    <EntitySet Name="Lecciones" EntityType="DiagramaEDUNICA.Leccion" />
+    <AssociationSet Name="EstudianteInteresesCategoria" Association="DiagramaEDUNICA.EstudianteInteresesCategoria">
+      <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="InteresesCategoria" EntitySet="InteresesCategorias" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaInteresesCategoria" Association="DiagramaEDUNICA.CategoriaInteresesCategoria">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="InteresesCategoria" EntitySet="InteresesCategorias" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaCurso" Association="DiagramaEDUNICA.CategoriaCurso">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="Curso" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="CursoLeccion" Association="DiagramaEDUNICA.CursoLeccion">
+      <End Role="Curso" EntitySet="Cursos" />
+      <End Role="Leccion" EntitySet="Lecciones" />
+    </AssociationSet>
+    <AssociationSet Name="ProgresoLeccion" Association="DiagramaEDUNICA.ProgresoLeccion">
+      <End Role="Progreso" EntitySet="Progresos" />
+      <End Role="Leccion" EntitySet="Lecciones" />
+    </AssociationSet>
+    <AssociationSet Name="GradoCurso" Association="DiagramaEDUNICA.GradoCurso">
+      <End Role="Grado" EntitySet="Grados" />
+      <End Role="Curso" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="MaestroCurso" Association="DiagramaEDUNICA.MaestroCurso">
+      <End Role="Maestro" EntitySet="Maestros" />
+      <End Role="Curso" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="ColaboracionCurso" Association="DiagramaEDUNICA.ColaboracionCurso">
+      <End Role="Colaboracion" EntitySet="Colaboraciones" />
+      <End Role="Curso" EntitySet="Cursos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Estudiante">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEstudiante" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Edad" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="InteresesCategorias" Relationship="DiagramaEDUNICA.EstudianteInteresesCategoria" FromRole="Estudiante" ToRole="InteresesCategoria" />
+  </EntityType>
+  <EntityType Name="Grado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreGrado" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Cursoes" Relationship="DiagramaEDUNICA.GradoCurso" FromRole="Grado" ToRole="Curso" />
+  </EntityType>
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCurso" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="Presupuesto" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Categoria" Relationship="DiagramaEDUNICA.CategoriaCurso" FromRole="Curso" ToRole="Categoria" />
+    <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Leccions" Relationship="DiagramaEDUNICA.CursoLeccion" FromRole="Curso" ToRole="Leccion" />
+    <NavigationProperty Name="Grado" Relationship="DiagramaEDUNICA.GradoCurso" FromRole="Curso" ToRole="Grado" />
+    <Property Name="GradoId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Maestro" Relationship="DiagramaEDUNICA.MaestroCurso" FromRole="Curso" ToRole="Maestro" />
+    <Property Name="MaestroId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Colaboracion" Relationship="DiagramaEDUNICA.ColaboracionCurso" FromRole="Curso" ToRole="Colaboracion" />
+    <Property Name="ColaboracionId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Progreso">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Leccions" Relationship="DiagramaEDUNICA.ProgresoLeccion" FromRole="Progreso" ToRole="Leccion" />
+  </EntityType>
+  <EntityType Name="Colaboracion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoColaboracion" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Cursoes" Relationship="DiagramaEDUNICA.ColaboracionCurso" FromRole="Colaboracion" ToRole="Curso" />
+  </EntityType>
+  <EntityType Name="Maestro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreMaestro" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Cursoes" Relationship="DiagramaEDUNICA.MaestroCurso" FromRole="Maestro" ToRole="Curso" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCategoria" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="InteresesCategorias" Relationship="DiagramaEDUNICA.CategoriaInteresesCategoria" FromRole="Categoria" ToRole="InteresesCategoria" />
+    <NavigationProperty Name="Cursoes" Relationship="DiagramaEDUNICA.CategoriaCurso" FromRole="Categoria" ToRole="Curso" />
+  </EntityType>
+  <EntityType Name="InteresesCategoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Estudiante" Relationship="DiagramaEDUNICA.EstudianteInteresesCategoria" FromRole="InteresesCategoria" ToRole="Estudiante" />
+    <Property Name="EstudianteId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categoria" Relationship="DiagramaEDUNICA.CategoriaInteresesCategoria" FromRole="InteresesCategoria" ToRole="Categoria" />
+    <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Leccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreLeccion" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="Completado" Type="Boolean" />
+    <NavigationProperty Name="Curso" Relationship="DiagramaEDUNICA.CursoLeccion" FromRole="Leccion" ToRole="Curso" />
+    <Property Name="CursoId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Progreso" Relationship="DiagramaEDUNICA.ProgresoLeccion" FromRole="Leccion" ToRole="Progreso" />
+    <Property Name="ProgresoId" Type="Int32" Nullable="false" />
+    <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="EstudianteInteresesCategoria">
+    <End Type="DiagramaEDUNICA.Estudiante" Role="Estudiante" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.InteresesCategoria" Role="InteresesCategoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InteresesCategoria">
+        <PropertyRef Name="EstudianteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaInteresesCategoria">
+    <End Type="DiagramaEDUNICA.Categoria" Role="Categoria" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.InteresesCategoria" Role="InteresesCategoria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InteresesCategoria">
+        <PropertyRef Name="CategoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaCurso">
+    <End Type="DiagramaEDUNICA.Categoria" Role="Categoria" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.Curso" Role="Curso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Curso">
+        <PropertyRef Name="CategoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoLeccion">
+    <End Type="DiagramaEDUNICA.Curso" Role="Curso" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.Leccion" Role="Leccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Leccion">
+        <PropertyRef Name="CursoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProgresoLeccion">
+    <End Type="DiagramaEDUNICA.Progreso" Role="Progreso" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.Leccion" Role="Leccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Progreso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Leccion">
+        <PropertyRef Name="ProgresoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GradoCurso">
+    <End Type="DiagramaEDUNICA.Grado" Role="Grado" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.Curso" Role="Curso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grado">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Curso">
+        <PropertyRef Name="GradoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MaestroCurso">
+    <End Type="DiagramaEDUNICA.Maestro" Role="Maestro" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.Curso" Role="Curso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Maestro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Curso">
+        <PropertyRef Name="MaestroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ColaboracionCurso">
+    <End Type="DiagramaEDUNICA.Colaboracion" Role="Colaboracion" Multiplicity="1" />
+    <End Type="DiagramaEDUNICA.Curso" Role="Curso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colaboracion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Curso">
+        <PropertyRef Name="ColaboracionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

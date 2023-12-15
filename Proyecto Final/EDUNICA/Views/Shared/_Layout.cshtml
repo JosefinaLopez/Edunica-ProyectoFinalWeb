@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Plataforma Virtual</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="~/Content/css/Style.css" rel="stylesheet" />
+    <link rel="icon" href="~/Content/img/iconoxd.ico" type="image/x-icon">
+    <style>
+        .footer {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-variant: unicase;
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .xd {
+            position: relative;
+            top: -2px;
+        }
+
+        .container-xxl {
+            gap: 3px;
+        }
+
+            .container-xxl > a:hover, #navxd > li > a:hover {
+                color: aqua;
+                letter-spacing: 0.1em;
+                font-weight: 200;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: darkblue !important;  font-family: 'Nunito', sans-serif; color:white; ">
+        <div class="container-xxl">
+            <img src="~/Content/img/iconoxd.ico" alt="Bootstrap" width="30" height="30" class="xd">
+            @Html.ActionLink("EduNica", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <ul class="navbar-nav flex-grow-1" id="navxd">
+                            @if (User.IsInRole("admin"))
+                            {
+                                <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Cursos", "Index", "Cursoes", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Lecciones", "Create", "Leccions", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Maestros Activos", "Index", "Maestroes", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Colaboraciones", "Index", "Colaboracions", new { area = "" }, new { @class = "nav-link" })</li>
+                            }
+                            @if (User.IsInRole("alumno"))
+                            {
+                                <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Cursos", "Index", "Cursoes", new { area = "" }, new { @class = "nav-link" })</li>
+                            }
+                            @if (User.IsInRole("profesor"))
+                            {
+                                <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Cursos", "Index", "Cursoes", new { area = "" }, new { @class = "nav-link" })</li>
+                                <li>@Html.ActionLink("Nueva Leccion", "Create", "Leccions", new { area = "" }, new { @class = "nav-link" })</li>
+                            }
+                        </ul>
+
+                    }
+                    @Html.Partial("_LoginPartial")
+                }
+            </div>
+                
+        </div>
+    </nav>
+    <div class="container-xlx">
+        @RenderBody()
+        <footer class="footer">
+            <p>&copy; SkyTech Corporation @DateTime.Now.Year </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf28e62797564a15a40ff272a6103111" Name="Diagram1" >
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Estudiante" Width="1.5" PointX="0.5" PointY="0.5" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Grado" Width="1.5" PointX="9.125" PointY="0.875" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Curso" Width="1.5" PointX="5.125" PointY="2.5" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Progreso" Width="1.5" PointX="9.5" PointY="3.125" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Colaboracion" Width="1.5" PointX="0.5" PointY="3.75" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Maestro" Width="1.5" PointX="2.75" PointY="2.875" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Categoria" Width="1.5" PointX="6.5" PointY="0.5" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.InteresesCategoria" Width="1.5" PointX="3.375" PointY="0.5" FillColor="Indigo" />
+        <EntityTypeShape EntityType="DiagramaEDUNICA.Leccion" Width="1.5" PointX="7.375" PointY="3.25" FillColor="Indigo" />
+        <AssociationConnector Association="DiagramaEDUNICA.EstudianteInteresesCategoria" />
+        <AssociationConnector Association="DiagramaEDUNICA.CategoriaInteresesCategoria" />
+        <AssociationConnector Association="DiagramaEDUNICA.CategoriaCurso" />
+        <AssociationConnector Association="DiagramaEDUNICA.CursoLeccion" />
+        <AssociationConnector Association="DiagramaEDUNICA.ProgresoLeccion" />
+        <AssociationConnector Association="DiagramaEDUNICA.GradoCurso" />
+        <AssociationConnector Association="DiagramaEDUNICA.MaestroCurso" />
+        <AssociationConnector Association="DiagramaEDUNICA.ColaboracionCurso" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

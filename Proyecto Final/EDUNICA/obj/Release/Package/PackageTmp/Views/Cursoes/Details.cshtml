@@ -1,0 +1,66 @@
+﻿@model EDUNICA.Models.Curso
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Curso</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCurso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCurso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Presupuesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Presupuesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.NombreCategoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.NombreCategoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grado.NombreGrado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grado.NombreGrado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maestro.NombreMaestro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maestro.NombreMaestro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Colaboracion.TipoColaboracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Colaboracion.TipoColaboracion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

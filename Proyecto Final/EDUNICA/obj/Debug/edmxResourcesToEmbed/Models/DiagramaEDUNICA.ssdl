@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiagramaEDUNICA.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCategoria" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Colaboraciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoColaboracion" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cursos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCurso" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Presupuesto" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+    <Property Name="CategoriaId" Type="int" Nullable="false" />
+    <Property Name="GradoId" Type="int" Nullable="false" />
+    <Property Name="MaestroId" Type="int" Nullable="false" />
+    <Property Name="ColaboracionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEstudiante" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Edad" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreGrado" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InteresesCategorias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EstudianteId" Type="int" Nullable="false" />
+    <Property Name="CategoriaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lecciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreLeccion" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Completado" Type="bit" />
+    <Property Name="CursoId" Type="int" Nullable="false" />
+    <Property Name="ProgresoId" Type="int" Nullable="false" />
+    <Property Name="Img" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Maestros">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreMaestro" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Progresos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CategoriaCurso">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cursos">
+        <PropertyRef Name="CategoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoriaInteresesCategoria">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+    <End Role="InteresesCategorias" Type="Self.InteresesCategorias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InteresesCategorias">
+        <PropertyRef Name="CategoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ColaboracionCurso">
+    <End Role="Colaboraciones" Type="Self.Colaboraciones" Multiplicity="1" />
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colaboraciones">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cursos">
+        <PropertyRef Name="ColaboracionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CursoLeccion">
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="1" />
+    <End Role="Lecciones" Type="Self.Lecciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cursos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lecciones">
+        <PropertyRef Name="CursoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstudianteInteresesCategoria">
+    <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="1" />
+    <End Role="InteresesCategorias" Type="Self.InteresesCategorias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiantes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InteresesCategorias">
+        <PropertyRef Name="EstudianteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradoCurso">
+    <End Role="Grados" Type="Self.Grados" Multiplicity="1" />
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cursos">
+        <PropertyRef Name="GradoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaestroCurso">
+    <End Role="Maestros" Type="Self.Maestros" Multiplicity="1" />
+    <End Role="Cursos" Type="Self.Cursos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Maestros">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cursos">
+        <PropertyRef Name="MaestroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProgresoLeccion">
+    <End Role="Progresos" Type="Self.Progresos" Multiplicity="1" />
+    <End Role="Lecciones" Type="Self.Lecciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Progresos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lecciones">
+        <PropertyRef Name="ProgresoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DiagramaEDUNICAStoreContainer">
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Colaboraciones" EntityType="Self.Colaboraciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cursos" EntityType="Self.Cursos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grados" EntityType="Self.Grados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InteresesCategorias" EntityType="Self.InteresesCategorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lecciones" EntityType="Self.Lecciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Maestros" EntityType="Self.Maestros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Progresos" EntityType="Self.Progresos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CategoriaCurso" Association="Self.FK_CategoriaCurso">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Cursos" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoriaInteresesCategoria" Association="Self.FK_CategoriaInteresesCategoria">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="InteresesCategorias" EntitySet="InteresesCategorias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ColaboracionCurso" Association="Self.FK_ColaboracionCurso">
+      <End Role="Colaboraciones" EntitySet="Colaboraciones" />
+      <End Role="Cursos" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoLeccion" Association="Self.FK_CursoLeccion">
+      <End Role="Cursos" EntitySet="Cursos" />
+      <End Role="Lecciones" EntitySet="Lecciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstudianteInteresesCategoria" Association="Self.FK_EstudianteInteresesCategoria">
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+      <End Role="InteresesCategorias" EntitySet="InteresesCategorias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradoCurso" Association="Self.FK_GradoCurso">
+      <End Role="Grados" EntitySet="Grados" />
+      <End Role="Cursos" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaestroCurso" Association="Self.FK_MaestroCurso">
+      <End Role="Maestros" EntitySet="Maestros" />
+      <End Role="Cursos" EntitySet="Cursos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProgresoLeccion" Association="Self.FK_ProgresoLeccion">
+      <End Role="Progresos" EntitySet="Progresos" />
+      <End Role="Lecciones" EntitySet="Lecciones" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

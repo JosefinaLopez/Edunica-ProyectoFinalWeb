@@ -1,0 +1,77 @@
+﻿@using EDUNICA.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Iniciar sesión";
+}
+<style>
+    main {
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(180deg, rgb(0 0 137) 40.1%, rgb(83 224 255) 100%);
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .rowx {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: white;
+        width: 680px;
+        margin: 35px;
+        text-align: center;
+    }
+    #loginForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container-loginxd {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<main aria-labelledby="title">
+    <div class="rowx">
+    <div>
+        <img src="~/Content/img/Recurso3.jpg" alt="Image" class="imglogin" style="width:340px; height:420px;" />
+    </div>
+        <div class="container-loginxd">
+            <section id="loginForm">
+                <h2 id="title">@ViewBag.Title</h2>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="rowxd">
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="rowxd">
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-10">
+                            <input type="submit" value="Iniciar sesión" class="nose" style="width:120px;" />                        
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+       
+        </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

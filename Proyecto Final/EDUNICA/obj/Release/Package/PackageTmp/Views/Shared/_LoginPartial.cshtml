@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    @Html.AntiForgeryToken()
+    <style>
+        .uu > a:hover, #uu:hover {
+            color: aqua;
+            letter-spacing:0.1em;
+        }
+    </style>
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="navbar-nav navbar-right">
+            <li class="uu">
+                @Html.ActionLink("Hola, " + User.Identity.GetUserName() + "!", "Index", "Cursoes", routeValues: null, htmlAttributes: new { title = "Cursos", @class = "nav-link" })
+            </li>
+            <li><a class="nav-link" id="uu" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        <li class="uu">@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    </ul>
+}

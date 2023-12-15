@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EDUNICA.Models.Estudiante>
+
+@{
+    ViewBag.Title = "Estudiantes";
+}
+
+<h2>Estudiantes</h2>
+<hr />
+
+<p>
+    @Html.ActionLink("+ Estudiante", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreEstudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Edad)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreEstudiante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Edad)
+        </td>
+        @if (User.IsInRole("admin"))
+         {
+            <td>
+                @Html.ActionLink("✏️", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("🗑️", "Delete", new { id = item.Id })
+            </td>
+         }
+    </tr>
+}
+
+</table>

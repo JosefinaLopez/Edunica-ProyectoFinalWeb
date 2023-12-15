@@ -1,0 +1,164 @@
+﻿@model EDUNICA.Models.Leccion
+
+@{
+    ViewBag.Title = "Editar";
+}
+<style>
+    .nose {
+        width: 100%;
+        margin: 10px;
+    }
+
+    .form-horizontal {
+        margin: 40px;
+    }
+</style>
+
+
+<h2 style="text-decoration-line: underline;text-align: center;padding: 10px;">
+    Editando Leccion - @Model.NombreLeccion <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001" />
+    </svg>
+</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="container-img" style="display:flex; justify-content:center; width:100%; padding:20px; margin-left:1rem;">
+                <img src="@Model.Img" alt="XD" id="imgview" style="width:150px; border-radius:30px;" />
+
+            </div>
+            <input type="file" id="inputFile" name="InputFile" value=""  class="form-control" accept="image/*">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NombreLeccion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NombreLeccion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NombreLeccion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px; width:700px;" name="Descripcion">@Model.Descripcion</textarea>
+
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Completado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Completado, new SelectList(
+                new List<Object>{
+                    new { value = true , text = "Completado"  },
+                    new { value = false , text = "No Completado" }
+                },
+                "value",
+                "text",
+                Model.Completado
+            ), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Completado, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CursoId, "CursoId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CursoId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CursoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProgresoId, "ProgresoId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProgresoId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ProgresoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+  
+    <input type="hidden" name="Img" id="Imgxd" />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar Cambios" class="nose" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAZJjndmHaSJzrWsMNn2ohQ4bl6rBn4CmI",
+        authDomain: "proyectofinalweb-daabd.firebaseapp.com",
+        projectId: "proyectofinalweb-daabd",
+        storageBucket: "proyectofinalweb-daabd.appspot.com",
+        messagingSenderId: "795754307546",
+        appId: "1:795754307546:web:32781e99a1790f23e2eae3",
+        measurementId: "G-EN6SQZQNBJ"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputFile = document.getElementById('inputFile'); // Reemplaza 'inputFile' con el ID real de tu campo de archivo
+
+        inputFile.addEventListener('change', function (event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del campo de archivo
+
+            subirImagenYCrearLeccion();
+        });
+    });
+
+    function subirImagenYCrearLeccion() {
+        const fileInput = document.getElementById('inputFile');
+
+        if (fileInput.files.length > 0) {
+            //alert("Probando");
+            const file = fileInput.files[0];
+            //alert(file);
+            const storageRef = ref(storage, `ImgLeccion/${file.name}`);
+            // Subir la imagen a Firebase Storage
+            uploadBytes(storageRef, file).then(snapshot => {
+                //alert('Imagen subida con éxito');
+                return getDownloadURL(snapshot.ref);
+            }).then(downloadURL => {
+
+                //alert(downloadURL);
+                let vaxd = document.getElementById("Imgxd");
+                vaxd.value = downloadURL;
+                var img = document.getElementById("imgview");
+                img.src = downloadURL;
+                fileInput.value = downloadURL;
+
+            });
+
+
+        } else {
+            console.error('Selecciona una imagen');
+        }
+
+
+    }
+</script>

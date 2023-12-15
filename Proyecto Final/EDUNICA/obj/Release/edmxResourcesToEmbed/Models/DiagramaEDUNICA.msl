@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DiagramaEDUNICAStoreContainer" CdmEntityContainer="DiagramaEDUNICAContainer">
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Estudiante)">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreEstudiante" ColumnName="NombreEstudiante" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grados">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Grado)">
+        <MappingFragment StoreEntitySet="Grados">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreGrado" ColumnName="NombreGrado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cursos">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Curso)">
+        <MappingFragment StoreEntitySet="Cursos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreCurso" ColumnName="NombreCurso" />
+          <ScalarProperty Name="Presupuesto" ColumnName="Presupuesto" />
+          <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+          <ScalarProperty Name="GradoId" ColumnName="GradoId" />
+          <ScalarProperty Name="MaestroId" ColumnName="MaestroId" />
+          <ScalarProperty Name="ColaboracionId" ColumnName="ColaboracionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Progresos">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Progreso)">
+        <MappingFragment StoreEntitySet="Progresos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colaboraciones">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Colaboracion)">
+        <MappingFragment StoreEntitySet="Colaboraciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TipoColaboracion" ColumnName="TipoColaboracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Maestros">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Maestro)">
+        <MappingFragment StoreEntitySet="Maestros">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreMaestro" ColumnName="NombreMaestro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Categoria)">
+        <MappingFragment StoreEntitySet="Categorias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InteresesCategorias">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.InteresesCategoria)">
+        <MappingFragment StoreEntitySet="InteresesCategorias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EstudianteId" ColumnName="EstudianteId" />
+          <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lecciones">
+      <EntityTypeMapping TypeName="IsTypeOf(DiagramaEDUNICA.Leccion)">
+        <MappingFragment StoreEntitySet="Lecciones">
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NombreLeccion" ColumnName="NombreLeccion" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Completado" ColumnName="Completado" />
+          <ScalarProperty Name="CursoId" ColumnName="CursoId" />
+          <ScalarProperty Name="ProgresoId" ColumnName="ProgresoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

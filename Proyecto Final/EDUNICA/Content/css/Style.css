@@ -1,0 +1,583 @@
+﻿.tracking-in-contract {
+    animation: tracking-in-contract 1.8s linear both
+}
+.tracking-in-contract:hover {
+    animation: tracking-in-contract 1.8s linear both
+}
+@keyframes tracking-in-contract {
+    0% {
+        letter-spacing: .2em;
+        opacity: 0
+    }
+
+    40% {
+        opacity: .6
+    }
+
+    100% {
+        letter-spacing: normal;
+        opacity: 1
+    }
+}
+
+.slide-right {
+    animation: slide-right 1s linear both
+}
+
+@keyframes slide-right {
+    0% {
+        transform: translateX(0)
+    }
+
+    100% {
+        transform: translateX(100px)
+    }
+}
+
+.tracking-in-contract:has(:hover) {
+    animation: tracking-in-contract 1.8s linear both
+}
+
+@keyframes tracking-in-contract {
+    0% {
+        letter-spacing: .2em;
+        opacity: 0
+    }
+
+    40% {
+        opacity: .6
+    }
+
+    100% {
+        letter-spacing: normal;
+        opacity: 1
+    }
+}
+
+.slide-right:hover {
+    animation: slide-right 1s linear both
+}
+
+@keyframes slide-right {
+    0% {
+        transform: translateX(0)
+    }
+
+    100% {
+        transform: translateX(100px)
+    }
+}
+
+.slide-left {
+    animation: slide-left 1s linear both
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(0)
+    }
+
+    100% {
+        transform: translateX(-100px)
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+   /* font-family: 'Nunito', sans-serif;
+    font-family: 'Delius Unicase', cursive;*/
+}
+
+.hero {
+    color: white;
+    display: flex;
+    background: linear-gradient( rgb(0 0 139 / 8%), rgb(0 0 139) ), url(/Content/img/portada1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    height: 88vh;
+}
+
+.hero-content {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#xd {
+    position: relative;
+    left:14.4rem;
+    top:1.4rem;
+    cursor:pointer;
+}
+/*FROM UIVERSE*/
+.btnn {
+    color: white;
+    cursor: pointer;
+    height: 4em;
+    /*width: 12em;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0px solid black;
+}
+
+.wrapper {
+    height: 2em;
+    width: 8em;
+    position: relative;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:0;
+}
+
+.text {
+    font-size: 17px;
+    z-index: 1;
+    color: white;
+    padding: 7px 20px;
+    border-radius: 28px;
+    background: #26282ba3;
+    transition: all 0.5s ease;
+}
+
+.flower {
+    display: grid;
+    grid-template-columns: 1em 1em;
+    position: absolute;
+    transition: grid-template-columns 0.8s ease;
+}
+
+.flower1 {
+    top: -12px;
+    left: -13px;
+    transform: rotate(5deg);
+}
+
+.flower2 {
+    bottom: -5px;
+    left: 8px;
+    transform: rotate(35deg);
+}
+
+.flower3 {
+    bottom: -15px;
+    transform: rotate(0deg);
+}
+
+.flower4 {
+    top: -14px;
+    transform: rotate(15deg);
+}
+
+.flower5 {
+    right: 11px;
+    top: -3px;
+    transform: rotate(25deg);
+}
+
+.flower6 {
+    right: -15px;
+    bottom: -15px;
+    transform: rotate(30deg);
+}
+
+.petal {
+    height: 1em;
+    width: 1em;
+    border-radius: 40% 70% / 7% 90%;
+    background: linear-gradient(#07a6d7, #93e0ee);
+    border: 0.5px solid #96d1ec;
+    z-index: 0;
+    transition: width 0.8s ease, height 0.8s ease;
+}
+
+.two {
+    transform: rotate(90deg);
+}
+
+.three {
+    transform: rotate(270deg);
+}
+
+.four {
+    transform: rotate(180deg);
+}
+
+.btnn:hover .petal {
+    background: linear-gradient(#0761d7, #93bdee);
+    border: 0.5px solid #96b4ec;
+}
+
+.btnn:hover .flower {
+    grid-template-columns: 1.5em 1.5em;
+}
+
+.btnn:hover .flower .petal {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.btnn:hover .text {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.btnn:hover div.flower1 {
+    animation: 15s linear 0s normal none infinite running flower1;
+}
+
+@keyframes flower1 {
+    0% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(365deg);
+    }
+}
+
+.btnn:hover div.flower2 {
+    animation: 13s linear 1s normal none infinite running flower2;
+}
+
+@keyframes flower2 {
+    0% {
+        transform: rotate(35deg);
+    }
+
+    100% {
+        transform: rotate(-325deg);
+    }
+}
+
+.btnn:hover div.flower3 {
+    animation: 16s linear 1s normal none infinite running flower3;
+}
+
+@keyframes flower3 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btnn:hover div.flower4 {
+    animation: 17s linear 1s normal none infinite running flower4;
+}
+
+@keyframes flower4 {
+    0% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(375deg);
+    }
+}
+
+.btnn:hover div.flower5 {
+    animation: 20s linear 1s normal none infinite running flower5;
+}
+
+@keyframes flower5 {
+    0% {
+        transform: rotate(25deg);
+    }
+
+    100% {
+        transform: rotate(-335deg);
+    }
+}
+
+.btnn:hover div.flower6 {
+    animation: 15s linear 1s normal none infinite running flower6;
+}
+
+@keyframes flower6 {
+    0% {
+        transform: rotate(30deg);
+    }
+
+    100% {
+        transform: rotate(390deg);
+    }
+}
+/*FINAL*/
+.section_our_solution .row {
+    align-items: center;
+}
+
+.our_solution_category {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.our_solution_category .solution_cards_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.solution_cards_box .solution_card {
+    flex: 0 50%;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2), 0 5px 15px 0 rgba(37, 44, 97, 0.15);
+    border-radius: 15px;
+    margin: 8px;
+    padding: 10px 15px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    min-height: 265px;
+    transition: 0.7s;
+}
+
+.solution_cards_box .solution_card:hover {
+    background: #309df0;
+    color: #fff;
+    transform: scale(1.1);
+    z-index: 9;
+}
+
+.solution_cards_box .solution_card:hover::before {
+    background: rgb(85 108 214 / 15%);
+}
+
+.solution_cards_box .solution_card:hover .solu_title h3,
+.solution_cards_box .solution_card:hover .solu_description p {
+    color: #fff;
+}
+
+.solution_cards_box .solution_card:before {
+    content: "";
+    position: absolute;
+    background: rgb(85 108 214 / 5%);
+    width: 170px;
+    height: 400px;
+    z-index: -1;
+    transform: rotate(42deg);
+    right: -56px;
+    top: -23px;
+    cursor:pointer;
+    border-radius: 35px;
+}
+
+.solution_cards_box .solution_card:hover .solu_description button {
+    background: #fff !important;
+    color:darkblue;
+}
+
+.solution_card .solu_title div {
+    color: #212121;
+    font-size: 1.3rem;
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
+.solution_card .solu_description p {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.solution_card .solu_description button {
+    border: 0;
+    border-radius: 15px;
+    background: linear-gradient( 140deg, #0d6efd 0%, #4a42ca 50%, #0a58ca 75% ) !important;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 16px;
+}
+
+.our_solution_content div {
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+.hover_color_bubble {
+    position: absolute;
+    background: rgb(54 81 207 / 15%);
+    width: 100rem;
+    height: 100rem;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    top: 16rem;
+    border-radius: 50%;
+    transform: rotate(-36deg);
+    left: -18rem;
+    transition: 0.7s;
+}
+
+.solution_cards_box .solution_card:hover .hover_color_bubble {
+    top: 0rem;
+}
+
+.solution_cards_box .solution_card .so_top_icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.solution_cards_box .solution_card .so_top_icon img {
+    width: 40px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/*start media query*/
+@media screen and (min-width: 320px) {
+    .sol_card_top_3 {
+        position: relative;
+        top: 0;
+    }
+
+    .our_solution_category {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .our_solution_category .solution_cards_box {
+        flex: auto;
+    }
+    .rowx{
+        grid-template-columns:1fr;
+    }
+    .imglogin {
+        width: 340px;
+        height: 300px;
+    }
+    .uwu > ul {
+        list-style: none;
+        font-size: small;
+        letter-spacing: 0.2em;
+    }
+    #caja > div {
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+        gap: 1rem;
+    }
+    .row{
+        grid-auto-columns:1fr;
+    }
+    .lection {
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+        padding: 10px;
+    }
+    .card-img{
+        height:50vh;
+    }
+    .img {
+        width: 200px;
+        border-radius: 5%;
+        position: relative;
+        z-index: 9999;
+        right: -6rem;
+        bottom: 15rem;
+    }
+    .let{
+        left:5rem;
+        top:3rem;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+    .our_solution_category .solution_cards_box {
+        flex: 1;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .sol_card_top_3 {
+        position: relative;
+        top: -3rem;
+    }
+
+    .our_solution_category {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+#aboutme {
+    background-color: darkblue;
+    color: white;
+}
+
+.caja {
+    width: 200vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    left: 7rem;
+}
+.opti {
+    display: flex;
+    justify-content: center;
+    gap:10px;
+}
+
+.opti > a , .nose{
+    border:none;
+    background-color: darkblue;
+    color: white;
+    text-decoration: none;
+    padding: 7px;
+    border-radius: 30px;
+}
+.nose{
+    width:100px;
+}
+.opti > a:hover,.nose:hover {
+background-color:mediumslateblue;
+}
+.form-control,.form-select,textarea {
+    text-align: center;
+    width: 300px;
+    background-color: white;
+    border-radius: 30px;
+}
+.form-horizontal {
+    display: grid;
+    place-content: center;
+    grid-gap: 7px;
+    place-items:center;
+}
+
+/* Define la clase con la animación */
+.deslizar-abajo {
+    animation-name: deslizarAbajo;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.46, 1);
+}
+/* Define la animación */
+@keyframes deslizarAbajo {
+    from {
+        transform: translateY(10%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+

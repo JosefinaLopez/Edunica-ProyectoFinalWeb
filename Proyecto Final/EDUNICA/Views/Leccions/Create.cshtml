@@ -1,0 +1,149 @@
+﻿@model EDUNICA.Models.Leccion
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .nose{
+        width:100%;
+        margin:20px;
+    }
+    .form-horizontal{
+        padding:40px;
+    }
+</style>
+@using (Html.BeginForm("Create", "Leccions", FormMethod.Post, new { enctype = "multipart/form-data", id = "XD" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h3>Crear un Nueva Leccion</h3>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="container-img" style="display:flex; justify-content:center; width:100%; padding:20px; margin-left:1rem;">
+                <img src="" alt="XD" id="imgview" style="width:150px; border-radius:30px;" />
+
+            </div>
+            <input type="file" id="inputFile" name="InputFile" value="" class="form-control" accept="image/*">
+        </div>
+    </div>
+    @Html.LabelFor(model => model.NombreLeccion, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.NombreLeccion, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.NombreLeccion, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Completado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select class="form-select" aria-label="Default select example" name="Completado">
+                <option selected>Seleccione un Estado</option>
+                <option value="true">Completado</option>
+                <option value="false">No Completado</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CursoId, "Curso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CursoId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CursoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProgresoId, "Progreso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProgresoId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CursoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <input type="hidden" name="Img" id="Imgxd" />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear Leccion" class="nose" />
+        </div>
+    </div>
+</div>
+}
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAZJjndmHaSJzrWsMNn2ohQ4bl6rBn4CmI",
+        authDomain: "proyectofinalweb-daabd.firebaseapp.com",
+        projectId: "proyectofinalweb-daabd",
+        storageBucket: "proyectofinalweb-daabd.appspot.com",
+        messagingSenderId: "795754307546",
+        appId: "1:795754307546:web:32781e99a1790f23e2eae3",
+        measurementId: "G-EN6SQZQNBJ"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputFile = document.getElementById('inputFile'); // Reemplaza 'inputFile' con el ID real de tu campo de archivo
+
+        inputFile.addEventListener('change', function (event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del campo de archivo
+
+            subirImagenYCrearLeccion();
+        });
+    });
+
+    function subirImagenYCrearLeccion() {
+        const fileInput = document.getElementById('inputFile');
+
+        if (fileInput.files.length > 0) {
+           // alert("Probando");
+            const file = fileInput.files[0];
+            //alert(file);
+            const storageRef = ref(storage, `ImgLeccion/${file.name}`);
+            // Subir la imagen a Firebase Storage
+            uploadBytes(storageRef, file).then(snapshot => {
+               // alert('Imagen subida con éxito');
+                return getDownloadURL(snapshot.ref);
+            }).then(downloadURL => {
+
+               // alert(downloadURL);
+                let vaxd = document.getElementById("Imgxd");
+                vaxd.value = downloadURL;
+                var img = document.getElementById("imgview");
+                img.src = downloadURL;
+                fileInput.value = downloadURL;
+
+            });
+
+
+        } else {
+            console.error('Selecciona una imagen');
+        }
+
+      
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

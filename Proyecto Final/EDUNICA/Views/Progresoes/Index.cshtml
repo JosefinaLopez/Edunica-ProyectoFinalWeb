@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EDUNICA.Models.Progreso>
+
+@{
+    ViewBag.Title = "Progresos";
+}
+
+<style>
+    .nose, .opti {
+        width: 140px;
+        text-decoration: none;
+    }
+
+    .nose > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .container-sm {
+        padding: 34px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .infoxd {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+<div class="container-sm">
+    <div class="infoxd">
+        <h1>Progresos</h1>
+        <p class="nose">
+            @Html.ActionLink("+ Nuevo Maestro", "Create")
+        </p>
+    </div>
+    <hr />
+ </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>

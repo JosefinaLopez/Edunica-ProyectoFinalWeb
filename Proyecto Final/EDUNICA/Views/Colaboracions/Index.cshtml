@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EDUNICA.Models.Colaboracion>
+
+@{
+    ViewBag.Title = "Tipos de Colaboracion";
+}
+<style>
+    .nose, .opti {
+        width: 140px;
+        text-decoration: none;
+    }
+
+    .nose > a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .container-sm {
+        padding: 89px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .infoxd{
+        justify-content:space-between;
+        display:flex;
+    }
+</style>
+<div class="container-sm">
+    <div class="infoxd">
+        <h1>Tipos de Colaboraciones</h1>
+        <p class="nose" style="width:200px;">
+            @Html.ActionLink("+ Tipo de Colaboracion", "Create")
+        </p>
+    </div>
+        <hr />
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoColaboracion)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoColaboracion)
+            </td>
+            @if (User.IsInRole("admin"))
+                {
+                    <td class="opti">
+                        @Html.ActionLink("✏️", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("🗑️", "Delete", new { id = item.Id })
+                    </td>
+                }
+        </tr>
+    }
+
+    </table>
+</div>
